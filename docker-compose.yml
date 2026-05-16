@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  infralogapm:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - NEXTAUTH_URL=http://localhost:3000
+      - DATABASE_URL=file:./dev.db
+      - NEXTAUTH_SECRET=ReplaceWithYourSecret
+      - STRIPE_PUBLISHABLE_KEY=pk_test_51Rj5hgP8AiWBMTxDEtGwMqc9iAhhpeYev13pI1KAjPpQUVHq8c2yyi2aN47tt73XxScue80Lch91f5K9zyzVGhtC00UIBBFWil
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=whsec_replace_me
+    volumes:
+      - .:/app
