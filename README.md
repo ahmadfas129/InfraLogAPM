@@ -62,3 +62,23 @@ npm start
 
 - Checkout sessions and webhook support included.
 - Configure `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, and `STRIPE_WEBHOOK_SECRET`.
+
+## Environment & Secrets
+
+- Local development: create a `.env` file (not committed) with the required keys, for example:
+
+```env
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+NEXTAUTH_SECRET=your_nextauth_secret
+DATABASE_URL=file:./dev.db
+```
+
+- Add a `.env.example` to the repo with placeholder values (no real secrets).
+
+- Docker / CI: the project reads `STRIPE_SECRET_KEY` from the environment (see `docker-compose.yml` which uses `${STRIPE_SECRET_KEY}`). Do not hard-code secrets in files or commits.
+
+- GitHub: to deploy or run workflows, add secrets to your repository via Settings → Secrets and variables → Actions. Add `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, and `STRIPE_WEBHOOK_SECRET` there.
+
+- Security: if a secret is accidentally committed, remove it from history (e.g., `git filter-repo` or `git filter-branch`) and rotate the secret immediately.
